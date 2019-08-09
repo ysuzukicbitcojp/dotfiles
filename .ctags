@@ -1,0 +1,3 @@
+--exclude=*.js
+--langmap=PHP:+.php.inc.tpl
+--recurse=yes
