@@ -14,7 +14,6 @@ set imsearch=-1
 syntax on
 set nocompatible
 filetype off
-colo murphy
 
 " dein settings BEGIN -->
 if &compatible
@@ -39,6 +38,8 @@ if dein#load_state('~/.vim/dein/')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('MattesGroeger/vim-bookmarks')
   call dein#add('beanworks/vim-phpfmt')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('tomasr/molokai')
 
   " Required:
   call dein#end()
@@ -89,9 +90,11 @@ let g:airline_symbols.branch = '|'
 let g:airline_symbols.readonly = '読専'
 let g:airline_symbols.linenr = '|'
 
-""
-" vim-phpfmt
+colo molokai
+
+
 "
+" vim-phpfmt
 " A standard type: PEAR, PHPCS, PSR1, PSR2, Squiz and Zend
-" let g:phpfmt_standard = 'PSR2'
-" let g:phpfmt_autosave = 1
+"let g:phpfmt_standard = 'PSR2'
+"let g:phpfmt_autosave = 1
