@@ -14,7 +14,15 @@ set imsearch=-1
 syntax on
 set nocompatible
 filetype off
-colo murphy
+
+"When entering the insert mode, the state of the IME in the previous insert mode is restored.
+let &t_SI .= "\e[<r"
+"When exiting insert mode, save current IME state and turn off IME.
+let &t_EI .= "\e[<s\e[<0t"
+"When Vim exits, IME is disabled and the disabled state is saved.
+let &t_te .= "\e[<0t\e[<s"
+"Shorten the time between pressing the ESC key and exiting insert mode
+set timeoutlen=100
 
 " dein settings BEGIN -->
 if &compatible
@@ -38,15 +46,17 @@ if dein#load_state('~/.vim/dein/')
   call dein#add('vim-airline/vim-airline')
   call dein#add('vim-airline/vim-airline-themes')
   call dein#add('MattesGroeger/vim-bookmarks')
-  call dein#add('beanworks/vim-phpfmt')
+  "call dein#add('beanworks/vim-phpfmt')
+  call dein#add('easymotion/vim-easymotion')
+  call dein#add('tomasr/molokai')
 
   " Required:
   call dein#end()
   call dein#save_state()
 endif
 
-" Required:
-filetype plugin indent on
+"filetype plugin indent on
+filetype on
 syntax enable
 
 " If you want to install not installed plugins on startup.
@@ -89,9 +99,11 @@ let g:airline_symbols.branch = '|'
 let g:airline_symbols.readonly = '読専'
 let g:airline_symbols.linenr = '|'
 
-""
-" vim-phpfmt
+colo molokai
+
+
 "
+" vim-phpfmt
 " A standard type: PEAR, PHPCS, PSR1, PSR2, Squiz and Zend
-" let g:phpfmt_standard = 'PSR2'
-" let g:phpfmt_autosave = 1
+"let g:phpfmt_standard = 'PSR2'
+"let g:phpfmt_autosave = 1
