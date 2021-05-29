@@ -1,0 +1,46 @@
+[[plugins]]
+repo='vim-airline/vim-airline'
+
+[[plugins]]
+repo='vim-airline/vim-airline-themes'
+
+[[plugins]]
+repo='MattesGroeger/vim-bookmarks'
+
+[[plugins]]
+repo='easymotion/vim-easymotion'
+
+[[plugins]]
+repo='scrooloose/nerdtree'
+
+[[plugins]]
+repo='ryanoasis/vim-devicons'
+
+[[plugins]]
+repo='MarcWeber/vim-addon-mw-utils'
+
+[[plugins]]
+repo='tomtom/tlib_vim' # toml
+
+[[plugins]]
+repo='garbas/vim-snipmate'
+
+[[plugins]]
+repo='honza/vim-snippets'
+
+[[plugins]]
+repo='tpope/vim-fugitive' # git
+
+[[plugins]]
+repo='dense-analysis/ale' # lint
+
+#[[plugins]]
+#repo='reireias/vim-cheatsheet # cheatsheet'
+
+[[plugins]]
+repo='iamcco/markdown-preview.nvim'
+on_ft=['markdown', 'pandoc.markdown', 'rmd']
+build="""
+cd app & yarn install
+"""
+
