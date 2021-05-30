@@ -100,11 +100,11 @@ endif
 let g:cheatsheet#cheat_file = '~/.cheatsheet.md'
 
 "open memo
-nmap <C-h>m :e ~\memo.md<CR>
+nmap <C-h>m :e ~\Documents\memo.md<CR>
 "opne vim cheatsheet
-nmap <C-h>v :e ~\note\CheatSheet\vim\index.md<CR>
+nmap <C-h>v :e ~\Documents\note\CheatSheet\vim\index.md<CR>
 "opne shell cheatsheet
-nmap <C-h>s :e ~\note\CheatSheet\shell\index.md<CR>
+nmap <C-h>s :e ~\Documents\note\CheatSheet\shell\index.md<CR>
 
 "open settings
 nmap <C-s>v :e ~\.cache\nvim\init.vim<CR>
