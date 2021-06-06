@@ -76,11 +76,11 @@ nnoremap <silent> <C-e> :NERDTreeToggle<CR>
 let g:NERDTreeWinSize = 40
 
 "garbas/vim-snipmate
-let g:snipMate = { 'snippet_version' : 1 }
 "add original snippet to php
 let g:snipMate = {}
 let g:snipMate.scope_aliases = {}
 let g:snipMate.scope_aliases['php'] = 'php,phpu'
+let g:snipMate = {'snippet_version':1}
 
 "easymotion/vim-easymotion
 "s{char}{char} to move to {char}{char}
