@@ -1,8 +1,11 @@
+# When using teraterm, comment out the line below to stop automatic loading
 [[plugins]]
 repo='vim-airline/vim-airline'
 
+# When using teraterm, comment out the line below to stop automatic loading
 [[plugins]]
 repo='vim-airline/vim-airline-themes'
+depends = ['vim-airline']
 
 [[plugins]]
 repo='MattesGroeger/vim-bookmarks'
@@ -34,9 +37,6 @@ repo='tpope/vim-fugitive' # git
 [[plugins]]
 repo='dense-analysis/ale' # lint
 
-#[[plugins]]
-#repo='reireias/vim-cheatsheet # cheatsheet'
-
 [[plugins]]
 repo='iamcco/markdown-preview.nvim'
 on_ft=['markdown', 'pandoc.markdown', 'rmd']
@@ -46,6 +46,20 @@ cd app & yarn install
 
 [[plugins]]
 repo='pepo-le/win-ime-con.nvim'
+if = 'has("win32") || has("win64")'
 
 [[plugins]]
 repo='simeji/winresizer'
+
+[[plugins]]
+repo = 'posva/vim-vue'
+
+[[plugins]]
+repo = 'leafgarland/typescript-vim'
+
+[[plugins]]
+repo='guns/xterm-color-table.vim'
+
+[[plugins]]
+repo='tomasr/molokai'
+
