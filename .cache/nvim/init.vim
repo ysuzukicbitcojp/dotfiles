@@ -47,6 +47,9 @@ set imsearch=-1
 set nu
 set relativenumber
 set nocompatible
+set mouse=a
+set mouse=a
+set cmdheight=2
 filetype plugin indent on
 syntax on
 
@@ -126,6 +129,15 @@ function! s:print_tabstop()
 endfunction
 nmap <C-h>t s:print_tabstop()
 
+" SetCbf
+command! -nargs=1 SetPhpCbf call s:set_php_cbf(<f-args>)
+function! s:set_php_cbf(standard)
+    let g:ale_fix_on_save = 1
+    let g:ale_php_phpcbf_standard = a:standard
+    let g:ale_fixers['php'] = ['phpcbf']
+    echo 'phpcbf coding starndar now set to ' . a:standard
+endfunction
+
 
 function! s:get_syn_id(transparent)
   let synid = synID(line("."), col("."), 1)
@@ -173,6 +185,8 @@ let g:winresizer_start_key = '<C-T>'
 "vimdiff
 set diffopt+=vertical
 
+" 
+nmap <leader>c :noh<CR>
 
 "iamcco/markdown-preview
 "let g:mkdp_markdown_css = expand('~/note/topics/monthly_report/css/style.css')
@@ -187,7 +201,7 @@ augroup vimrc_loading
   autocmd FileType vue syntax sync fromstart
 
   "php
-  autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 noexpandtab
+  autocmd FileType php setlocal tabstop=4 softtabstop=4 shiftwidth=4 expandtab
 
   "js
   autocmd FileType javascript setlocal tabstop=2 softtabstop=2 shiftwidth=2 expandtab

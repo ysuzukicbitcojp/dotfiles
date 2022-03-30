@@ -1,0 +1,11 @@
+{
+      "diagnostic-languageserver.mergeConfig": true,
+      "diagnostic-languageserver.filetypes": {
+                "php": ["phpcs"] },
+      "diagnostic-languageserver.linters": {
+                "phpcs" : {
+                        "command" : "phpcs",
+                        "args" : ["--standard=PSR2"]
+                }
+       }
+}
