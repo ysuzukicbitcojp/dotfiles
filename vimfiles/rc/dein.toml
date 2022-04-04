@@ -65,3 +65,9 @@ repo='guns/xterm-color-table.vim'
 [[plugins]]
 repo='tomasr/molokai'
 
+[[plugins]]
+repo='neoclide/coc.nvim'
+
+[[plugins]]
+repo='jeetsukumaran/vim-buffergator'
+hook_add='let g:buffergator_viewport_split_policy = "T"'
