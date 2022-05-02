@@ -48,7 +48,6 @@ set nu
 set relativenumber
 set nocompatible
 set mouse=a
-set mouse=a
 set cmdheight=2
 filetype plugin indent on
 syntax on
@@ -228,5 +227,14 @@ augroup vimrc_loading
   "ref : http://cohama.hateblo.jp/entry/2013/08/11/020849
   autocmd ColorScheme * highlight PreProc guifg=red guibg=grey15 ctermfg=red
 
-
 augroup end
+
+
+" ctags -->
+"" Split the pane vertically and tag jump.
+nnoremap tv :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+"" Split the pane horizontally and tag jump
+nnoremap th :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+
+"<-- ctags
