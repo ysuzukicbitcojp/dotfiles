@@ -57,16 +57,16 @@ if has('win32') || has('win64')
   set laststatus=2
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#branch#enabled = 1
-  let g:airline#extensions#tabline#enabled = 1
-  let g:airline#extensions#tabline#buffer_idx_mode = 1
+  "let g:airline#extensions#tabline#enabled = 1
+  "let g:airline#extensions#tabline#buffer_idx_mode = 1
   let g:airline#extensions#whitespace#mixed_indent_algo = 1
   let g:airline#extensions#default#layout = [['a', 'b', 'c'], ['x', 'y', 'z']]
   if has("win64")
   let g:airline_section_c = '%t'
   let g:airline_section_x = '%{&filetype}'
-  let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
-  let g:airline#extensions#ale#error_symbol = ' '
-  let g:airline#extensions#ale#warning_symbol = ' '
+  "let g:airline_section_z = '%3l:%2v %{airline#extensions#ale#get_warning()} %{airline#extensions#ale#get_error()}'
+  "let g:airline#extensions#ale#error_symbol = ' '
+  "let g:airline#extensions#ale#warning_symbol = ' '
   endif
 
   let g:airline#extensions#default#section_truncate_width = {}
@@ -230,11 +230,41 @@ augroup vimrc_loading
 augroup end
 
 
-" ctags -->
+" <ctags>
 "" Split the pane vertically and tag jump.
 nnoremap tv :vsp<CR> :exe("tjump ".expand('<cword>'))<CR>
 
 "" Split the pane horizontally and tag jump
 nnoremap th :split<CR> :exe("tjump ".expand('<cword>'))<CR>
+" </ctags>
 
-"<-- ctags
+" stop highlightsearch
+nnoremap  <C-h> :noh<CR>
+
+
+" <lsp-settings>
+if empty(globpath(&rtp, 'autoload/lsp.vim'))
+  finish
+endif
+
+function! s:on_lsp_buffer_enabled() abort
+  setlocal omnifunc=lsp#complete
+  setlocal signcolumn=yes
+  nmap <buffer> gd <plug>(lsp-definition)
+  nmap <buffer> <f2> <plug>(lsp-rename)
+  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
+endfunction
+
+augroup lsp_install
+  au!
+  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
+
+let g:lsp_diagnostics_enabled = 1
+let g:lsp_diagnostics_echo_cursor = 1
+let g:asyncomplete_auto_popup = 1
+let g:asyncomplete_auto_completeopt = 0
+let g:asyncomplete_popup_delay = 200
+let g:lsp_text_edit_enabled = 1
+" </lsp-settings>

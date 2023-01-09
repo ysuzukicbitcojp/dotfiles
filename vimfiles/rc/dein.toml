@@ -36,20 +36,20 @@ repo='honza/vim-snippets'
 [[plugins]]
 repo='tpope/vim-fugitive' # git
 
-[[plugins]]
-repo='dense-analysis/ale' # lint
-hook_add = """
-let g:ale_fixers = {
-\ 'typescript': ['prettier'],
-\ 'typescriptreact': ['prettier'],
-\ 'javascript': ['prettier'],
-\ 'javascriptreact': ['prettier'],
-\ 'css': ['prettier'],
-\}
-
-let g:ale_javascript_prettier_use_local_config = 1
-let g:ale_javascript_prettier_options = ' --sigle-quote --trailing-comma all'
-"""
+#[[plugins]]
+#repo='dense-analysis/ale' # lint
+#hook_add = """
+#let g:ale_fixers = {
+#\ 'typescript': ['prettier'],
+#\ 'typescriptreact': ['prettier'],
+#\ 'javascript': ['prettier'],
+#\ 'javascriptreact': ['prettier'],
+#\ 'css': ['prettier'],
+#\}
+#
+#let g:ale_javascript_prettier_use_local_config = 1
+#let g:ale_javascript_prettier_options = ' --sigle-quote --trailing-comma all'
+#"""
 
 
 [[plugins]]
@@ -84,3 +84,29 @@ repo='neoclide/coc.nvim'
 [[plugins]]
 repo='jeetsukumaran/vim-buffergator'
 hook_add='let g:buffergator_viewport_split_policy = "T"'
+
+
+# <vim-lsp>
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete.vim'
+
+[[plugins]]
+repo='prabirshrestha/asyncomplete-lsp.vim'
+
+[[plugins]]
+repo='prabirshrestha/vim-lsp'
+
+[[plugins]]
+repo='mattn/vim-lsp-settings'
+
+[[plugins]]
+repo='mattn/vim-lsp-icons'
+
+[[plugins]]
+repo='hrsh7th/vim-vsnip'
+
+[[plugins]]
+repo='hrsh7th/vim-vsnip-integ'
+
+# </vim-lsp>
