@@ -39,21 +39,20 @@ set softtabstop=4
 set expandtab
 set smartindent
 set hidden
-set acd
+"set acd
 set fileformats=unix,dos,mac
 set fileencodings=utf-8,sjis
 set iminsert=0
 set imsearch=-1
-set nu
+set number
 set relativenumber
-set nocompatible
 set mouse=a
 set cmdheight=2
 filetype plugin indent on
 syntax on
 
-if has('win32') || has('win64')
-  let g:airline_theme = 'papercolor'
+"if has('win32') || has('win64')
+  let g:airline_theme = 'minimalist'
   set laststatus=2
   let g:airline_powerline_fonts = 1
   let g:airline#extensions#branch#enabled = 1
@@ -75,9 +74,9 @@ if has('win32') || has('win64')
   "keymap to switch tab-line
   nmap <C-p> <Plug>AirlineSelectPrevTab
   nmap <C-n> <Plug>AirlineSelectNextTab
-else
-  set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
-endif
+"else
+"  set statusline=%F%m%h%w\ %<[ENC=%{&fenc!=''?&fenc:&enc}]\ [FMT=%{&ff}]\ [TYPE=%Y]\ %=[CODE=0x%02B]\ [POS=%l/%L(%02v)]
+"endif
 
 "NERDTree
 nnoremap <silent> <C-e> :NERDTreeToggle<CR>
@@ -99,9 +98,9 @@ map <leader>l <Plug>(easymotion-bd-jk)
 nmap <leader>l <Plug>(easymotion-overwin-line)
 
 "Visualize tab characters, whitespace characters, and line breaks
-if has("win32") || has("win64")
-    :set list listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
-endif
+"if has("win32") || has("win64")
+"    :set list listchars=tab:»-,trail:-,eol:↲,extends:»,precedes:«,nbsp:%
+"endif
 
 
 "open memo
@@ -241,49 +240,35 @@ nnoremap th :split<CR> :exe("tjump ".expand('<cword>'))<CR>
 " stop highlightsearch
 nnoremap  <C-h> :noh<CR>
 
+nnoremap tn :tabnext<CR>
+nnoremap tp :tabprevious<CR>
 
-" <lsp-settings>
-"    <200-lsp.vim>
-"      https://mattn.kaoriya.net/software/vim/20191231213507.htm
-if empty(globpath(&rtp, 'autoload/lsp.vim'))
-  finish
+" <vim-lsp>
+"if filereadable(expand('~/.cache/nvim/vim-lsp.vim'))
+"  source ~/.cache/nvim/vim-lsp.vim
+"endif
+" </vim-lsp>
+
+" <Coc.nvim>
+if filereadable(expand('~/.cache/nvim/coc.vim'))
+  source ~/.cache/nvim/coc.vim
+endif
+" </Coc.nvim>
+
+let g:python3_host_prog='/usr/bin/python3'
+
+" diffモードの設定
+if &diff
+  " 左側（元ファイル）の色を設定
+  hi DiffAdd    cterm=bold ctermfg=46 ctermbg=236
+  hi DiffChange cterm=bold ctermfg=220 ctermbg=236
+  hi DiffDelete cterm=bold ctermfg=160 ctermbg=236
+  " 右側（変更後のファイル）の色を設定
+  hi DiffText   cterm=bold ctermfg=33  ctermbg=236
 endif
 
-function! s:on_lsp_buffer_enabled() abort
-  setlocal omnifunc=lsp#complete
-  setlocal signcolumn=yes
-  nmap <buffer> gd <plug>(lsp-definition)
-  nmap <buffer> <f2> <plug>(lsp-rename)
-  inoremap <expr> <cr> pumvisible() ? "\<c-y>\<cr>" : "\<cr>"
-endfunction
+if executable("rg")
+  let &grepprg = 'rg --vimgrep --hidden > /dev/null'
+  set grepformat=%f:%l:%c:%m
+endif
 
-augroup lsp_install
-  au!
-  autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
-augroup END
-command! LspDebug let lsp_log_verbose=1 | let lsp_log_file = expand('~/lsp.log')
-
-let g:lsp_diagnostics_enabled = 1
-let g:lsp_diagnostics_echo_cursor = 1
-let g:asyncomplete_auto_popup = 1
-let g:asyncomplete_auto_completeopt = 0
-let g:asyncomplete_popup_delay = 200
-let g:lsp_text_edit_enabled = 1
-"    </200-lsp.vim>
-"    <disable Auto popup>
-"      https://github.com/prabirshrestha/asyncomplete.vim#auto-popup
-let g:asyncomplete_auto_popup = 0
-
-function! s:check_back_space() abort
-    let col = col('.') - 1
-    return !col || getline('.')[col - 1]  =~ '\s'
-endfunction
-
-inoremap <silent><expr> <TAB>
-  \ pumvisible() ? "\<C-n>" :
-  \ <SID>check_back_space() ? "\<TAB>" :
-  \ asyncomplete#force_refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-"    </disable Auto popup>
-" </lsp-settings>

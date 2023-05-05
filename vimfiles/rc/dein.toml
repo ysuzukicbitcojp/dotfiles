@@ -1,13 +1,13 @@
 # When using teraterm, comment out the line below to stop automatic loading
 [[plugins]]
 repo='vim-airline/vim-airline'
-if='has("win32") || has("win64")'
+#if='has("win32") || has("win64")'
 
 # When using teraterm, comment out the line below to stop automatic loading
 [[plugins]]
 repo='vim-airline/vim-airline-themes'
 depends = ['vim-airline']
-if='has("win32") || has("win64")'
+#if='has("win32") || has("win64")'
 
 [[plugins]]
 repo='MattesGroeger/vim-bookmarks'
@@ -34,6 +34,9 @@ repo='garbas/vim-snipmate'
 repo='honza/vim-snippets'
 
 [[plugins]]
+repo='airblade/vim-gitgutter'
+
+[[plugins]]
 repo='tpope/vim-fugitive' # git
 
 #[[plugins]]
@@ -52,12 +55,19 @@ repo='tpope/vim-fugitive' # git
 #"""
 
 
+#[[plugins]]
+#repo='iamcco/markdown-preview.nvim'
+#on_ft=['markdown', 'pandoc.markdown', 'rmd']
+#build="""
+#cd app & yarn install
+#"""
+
 [[plugins]]
-repo='iamcco/markdown-preview.nvim'
-on_ft=['markdown', 'pandoc.markdown', 'rmd']
-build="""
-cd app & yarn install
-"""
+repo='previm/previm'
+hook_add = '''
+let g:previm_open_cmd = '/mnt/c/Program\ Files\ \(x86\)/Google/Chrome/Application/chrome.exe'
+let g:previm_wsl_mode = 1
+'''
 
 [[plugins]]
 repo='pepo-le/win-ime-con.nvim'
@@ -78,35 +88,70 @@ repo='guns/xterm-color-table.vim'
 [[plugins]]
 repo='tomasr/molokai'
 
-#[[plugins]]
-#repo='neoclide/coc.nvim'
+[[plugins]]
+repo='neoclide/coc.nvim'
+rev='release'
+merged='0'
 
 [[plugins]]
 repo='jeetsukumaran/vim-buffergator'
 hook_add='let g:buffergator_viewport_split_policy = "T"'
 
 
-# <vim-lsp>
+## <vim-lsp>
+#
+#[[plugins]]
+#repo='prabirshrestha/asyncomplete.vim'
+#
+#[[plugins]]
+#repo='prabirshrestha/asyncomplete-lsp.vim'
+#
+#[[plugins]]
+#repo='prabirshrestha/vim-lsp'
+#
+#[[plugins]]
+#repo='mattn/vim-lsp-settings'
+#
+#[[plugins]]
+#repo='mattn/vim-lsp-icons'
+#
+#[[plugins]]
+#repo='hrsh7th/vim-vsnip'
+#
+#[[plugins]]
+#repo='hrsh7th/vim-vsnip-integ'
+#
+## </vim-lsp>
+
+# <fzf>
+[[plugins]]
+repo='junegunn/fzf'
+build='./install --bin'
+merged='0'
 
 [[plugins]]
-repo='prabirshrestha/asyncomplete.vim'
+repo='junegunn/fzf.vim'
+depends='fzf'
+hook_add = '''
+  command! -bang -nargs=* Rg
+    \ call fzf#vim#grep(
+    \   'rg --line-number --no-heading '.shellescape(<q-args>), 0,
+    \   fzf#vim#with_preview({'options': '--exact --reverse'}, 'right:50%:wrap'))
+  noremap <silent> <Leader>p :GFiles<CR>
+  noremap <silent> <Leader>P :Files<CR>
+  noremap <silent> <Leader>g :Rg<CR>
+  noremap <silent> <Leader>c :Commits<CR>
+  noremap <silent> <Leader>b :Buffers<CR>
+  noremap <silent> <Leader>C :Colors<CR>
+'''
+# </fzf>
 
 [[plugins]]
-repo='prabirshrestha/asyncomplete-lsp.vim'
+repo='tpope/vim-obsession'
+
 
 [[plugins]]
-repo='prabirshrestha/vim-lsp'
+repo='tpope/vim-surround'
 
 [[plugins]]
-repo='mattn/vim-lsp-settings'
-
-[[plugins]]
-repo='mattn/vim-lsp-icons'
-
-[[plugins]]
-repo='hrsh7th/vim-vsnip'
-
-[[plugins]]
-repo='hrsh7th/vim-vsnip-integ'
-
-# </vim-lsp>
+repo='tpope/vim-commentary'
