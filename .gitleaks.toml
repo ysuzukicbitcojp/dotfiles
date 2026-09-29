@@ -1,0 +1,26 @@
+# gitleaks 設定: 既定ルールに dotfiles 特有の検出ルールを追加する
+[extend]
+useDefault = true
+
+# サーバーの IP アドレス（ssh config などの混入対策）
+[[rules]]
+id = "ipv4-address"
+description = "IPv4 address"
+regex = '''\b(?:(?:25[0-5]|2[0-4]\d|1?\d?\d)\.){3}(?:25[0-5]|2[0-4]\d|1?\d?\d)\b'''
+[[rules.allowlists]]
+description = "ローカル・プライベートアドレスは許可"
+regexTarget = "match"
+regexes = [
+  '''^127\.''',
+  '''^10\.''',
+  '''^192\.168\.''',
+  '''^172\.(?:1[6-9]|2\d|3[01])\.''',
+  '''^0\.0\.0\.0$''',
+]
+
+# Azure OpenAI のリソース名（接続先の特定につながる）
+[[rules]]
+id = "azure-openai-endpoint"
+description = "Azure OpenAI endpoint"
+regex = '''https://[a-z0-9-]+\.openai\.azure\.com'''
+
