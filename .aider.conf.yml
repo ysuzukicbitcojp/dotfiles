@@ -1,0 +1,4 @@
+model: azure/gpt-4o
+#model: apac.anthropic.claude-sonnet-4-20250514-v1:0
+auto-commits: false
+chat-language: ja

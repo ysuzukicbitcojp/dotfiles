@@ -1,0 +1,101 @@
+[core]
+    ignorecase = false
+    quotepath = false
+    safecrlf = true
+    editor = "nvim -c \"set fenc=utf-8\" "
+[alias]
+    # 標準的なコマンド
+    b = branch
+    c = commit
+    cm = commit -m
+    f = fetch
+    s = status
+    st = stash
+    rh = reset --hard
+
+    # リモート含めブランチをcheckoutする
+    co = "!f() { args=$@; if [ -z \"$args\" ]; then branch=$(git branch --all | grep -v HEAD | fzf --preview 'echo {} | cut -c 3- | xargs git log --color=always' | cut -c 3-); git checkout $(echo $branch | sed 's#remotes/[^/]*/##'); else git checkout $args; fi }; f"
+
+    # リモート含めブランチをcheckoutする
+    sw = "!f() { args=$@; if [ -z \"$args\" ]; then branch=$(git branch --all | grep -v HEAD | fzf --preview 'echo {} | cut -c 3- | xargs git log --color=always' | cut -c 3-); git switch $(echo $branch | sed 's#remotes/[^/]*/##'); else git switch $args; fi }; f"
+
+    # ファイルの差分をプレビュー付きで確認する
+    d = "!f() { args=$@; [ -z \"$args\" ] && args=HEAD; ([ \"$args\" = \"HEAD\" ] && git status --short || git diff --name-status $args | sed 's/\t/  /') | fzf --preview \"echo {} | cut -c 4- | xargs git diff --color=always $args --\" --multi --height 90% | cut -c 4-; }; f"
+
+    # 差分を選択してaddする
+    da = !git d | xargs git add --
+
+    # 差分を選択してadd -pする
+    dap = "!f() { for f in $(git d); do git add -p -- $f; done }; f"
+
+    # 差分を選択してresetする
+    dr = !git d | xargs git reset --
+
+    # 差分を選択してHEADにcheckoutする
+    dch = !git d | xargs git checkout HEAD
+
+    # 現在のブランチをpullする
+    pl = "!f() { args=$@; [ -z \"$args\" ] && git pull origin $(git symbolic-ref --short HEAD) || git pull $args; }; f"
+
+    # 現在のブランチをpushする
+    ps = "!f() { args=$@; [ -z \"$args\" ] && git push origin HEAD || git push $args; }; f"
+
+    # スタッシュのリストを表示する
+    stl = !git stash list | fzf --preview 'echo {} | grep -o stash@{.*} | xargs git stash show -p --color=always' --height 90% | grep -o stash@{.*}
+
+    # スタッシュを選択してapplyする
+    sta = !git stl | xargs git stash apply
+
+    # スタッシュを選択してdropする
+    std = !git stl | xargs git stash drop
+
+    # ブランチの分岐、マージを視覚化します
+    lol = log --graph  --pretty=format:'%Cred%h%Creset -%C(bold yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit --all
+
+    # コミット毎の変更ファイルを一覧で表示します
+    lof = log  --name-status  --oneline --graph --decorate --abbrev-commit --all
+
+    # ブランチの分岐、マージを視覚化します
+    tree = log --graph --pretty=format:'%x09%C(auto) %h %Cgreen %ar %Creset%x09by"%C(cyan ul)%an%Creset" %x09%C(auto)%s %d'
+
+[merge]
+    ff = false
+    tool = vimdiff
+[mergetool "vimdiff"]
+    path = nvim
+[mergetool "meld"]
+    #cmd = meld \"$(wslpath -aw $LOCAL)\" \"$(wslpath -aw $BASE)\" \"$(wslpath -aw $REMOTE)\" --auto-merge
+    cmd = meld \"$(wslpath -aw $LOCAL)\" \"$(wslpath -aw $MERGED)\" \"$(wslpath -aw $REMOTE)\" --output \"$(wslpath -aw $MERGED)\"
+[mergetool "vscode"]
+    #cmd = code --merge
+    #cmd = code --merge \"$LOCAL\" \"$REMOTE\" \"$MERGED\"
+    #cmd = code --merge \"$(wslpath -aw $LOCAL)\" \"$(wslpath -aw $REMOTE)\" \"$(wslpath -aw $BASE)\" \"$(wslpath -aw $MERGED)\"
+    cmd = code --merge \"$LOCAL\" \"$REMOTE\" \"$BASE\" \"$MERGED\"
+    trustExitCode = false
+[mergetool]
+    keepBackup = false
+
+
+[diff]
+    tool = vimdiff
+[difftool "vimdiff"]
+    path = nvim
+[difftool "meld"]
+    cmd = meld \"$(wslpath -aw $LOCAL)\" \"$(wslpath -aw $REMOTE)\"
+[difftool "vscode"]
+    cmd = code \"$(wslpath -aw $LOCAL)\" \"$(wslpath -aw $REMOTE)\"
+
+[tig "bind"]
+    generic = D !git difftool --tool=vimdiff --no-prompt --trust-exit-code %(commit)^!
+[difftool]
+    prompt = false
+[filter "lfs"]
+    required = true
+    clean = git-lfs clean -- %f
+    smudge = git-lfs smudge -- %f
+    process = git-lfs filter-process
+[init]
+    defaultBranch = main
+
+[include]
+    path = ~/dotfiles/.gitconfig.private

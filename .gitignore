@@ -1,0 +1,27 @@
+# 許可リスト方式: すべて除外し、公開してよいものだけを明示的に戻す
+/*
+
+!.gitignore
+!.bashrc
+!Readme.md
+!.gitconfig
+!.tmux.conf
+!.dircolors
+!.git-prompt.sh
+!.myclirc
+!.aider.conf.yml
+!.config/
+
+# 旧 dein 構成の名残（lazy.nvim 移行後は未使用）
+.config/nvim/init.vim
+.config/nvim/toml/
+.config/nvim/lua/copilot_config.lua
+.config/nvim/lua/telescope_config.lua
+
+# 機密情報の保険（許可リスト外だが明示しておく）
+.ssh/
+.bashrc.local
+.claude/
+.gitconfig.private
+.env
+*.local

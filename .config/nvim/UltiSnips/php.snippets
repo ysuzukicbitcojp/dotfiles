@@ -1,0 +1,6 @@
+snippet dbg "Debug Log"
+$dbg = function($message) {
+    $logDir = '${1:/path/to/log_directory}';
+    file_put_contents($logDir . '/debug.log', print_r($message, true) . PHP_EOL, FILE_APPEND);
+};
+endsnippet

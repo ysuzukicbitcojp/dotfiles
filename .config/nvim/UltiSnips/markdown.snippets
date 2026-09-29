@@ -1,0 +1,156 @@
+# Headings (h1 ~ h3)
+snippet "heading 1" "Heading 1" b
+# ${1:Heading 1}
+$0
+endsnippet
+
+snippet "heading 2" "Heading 2" b
+## ${1:Heading 2}
+$0
+endsnippet
+
+snippet "heading 3" "Heading 3" b
+### ${1:Heading 3}
+$0
+endsnippet
+
+# Headings (h4 ~ h6)
+snippet "heading 4" "Heading 4" b
+#### ${1:Heading 4}
+$0
+endsnippet
+
+snippet "heading 5" "Heading 5" b
+##### ${1:Heading 5}
+$0
+endsnippet
+
+snippet "heading 6" "Heading 6" b
+###### ${1:Heading 6}
+$0
+endsnippet
+
+# Bold
+snippet b "Bold text" w
+**${1:${VISUAL:text}}**$0
+endsnippet
+
+# Italic
+snippet i "Italic text" w
+*${1:${VISUAL:text}}*$0
+endsnippet
+
+# Strikethrough
+snippet s "Strikethrough text" w
+~~${1:${VISUAL:text}}~~$0
+endsnippet
+
+# Unordered List
+snippet ul "Unordered List" b
+- ${1:item}
+endsnippet
+
+# Ordered List
+snippet ol "Ordered List" b
+1. ${1:item}
+endsnippet
+
+# Code Block
+snippet "code block" "Code Block" b
+\`\`\`${1:language}
+${2:${VISUAL:code}}
+\`\`\`
+$0
+endsnippet
+
+# Inline Code
+snippet c "Inline Code" w
+\`${1:${VISUAL:code}}\`$0
+endsnippet
+
+# Link
+snippet link "Link" w
+[${1:${VISUAL:text}}](${2:url})$0
+endsnippet
+
+# Image
+snippet img "Image" w
+![${1:${VISUAL:alt}}](${2:url})$0
+endsnippet
+
+# Blockquote
+snippet quote "Blockquote" b
+> ${1:${VISUAL:quote}}
+$0
+endsnippet
+
+# GFM Callouts
+snippet "callout note" "Callout: Note" b
+> [!NOTE]
+> ${1:${VISUAL:text}}
+$0
+endsnippet
+
+snippet "callout tip" "Callout: Tip" b
+> [!TIP]
+> ${1:${VISUAL:text}}
+$0
+endsnippet
+
+snippet "callout important" "Callout: Important" b
+> [!IMPORTANT]
+> ${1:${VISUAL:text}}
+$0
+endsnippet
+
+snippet "callout warning" "Callout: Warning" b
+> [!WARNING]
+> ${1:${VISUAL:text}}
+$0
+endsnippet
+
+snippet "callout caution" "Callout: Caution" b
+> [!CAUTION]
+> ${1:${VISUAL:text}}
+$0
+endsnippet
+
+# Horizontal Rule
+snippet hr "Horizontal Rule" b
+---
+$0
+endsnippet
+
+# Table
+snippet table "Table" b
+| ${1:Header 1} | ${2:Header 2} | ${3:Header 3} |
+| --- | --- | --- |
+| ${4:Cell} | ${5:Cell} | ${6:Cell} |
+$0
+endsnippet
+
+# Task List
+snippet todo "Task List" b
+- [ ] ${1:item}
+endsnippet
+
+# Front Matter
+snippet "front matter" "Front Matter (YAML)" b
+---
+title: ${1:title}
+date: `!v strftime("%Y-%m-%d")`
+draft: true
+---
+$0
+endsnippet
+
+# Details/Summary
+snippet details "Details/Summary" b
+<details>
+<summary>${1:Summary}</summary>
+
+${2:${VISUAL:content}}
+
+</details>
+$0
+endsnippet
